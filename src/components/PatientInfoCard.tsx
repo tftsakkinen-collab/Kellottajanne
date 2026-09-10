@@ -17,18 +17,23 @@ export const PatientInfoCard: React.FC<Props> = ({ language, patient, onChange }
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl">
-      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-800">
-        <div className="p-2 bg-teal-500/10 text-teal-400 rounded-xl border border-teal-500/20">
+    <div className="bg-slate-900/90 border border-slate-800/90 backdrop-blur-xl rounded-3xl p-5 sm:p-7 shadow-2xl shadow-slate-950/40 space-y-6">
+      
+      {/* Header */}
+      <div className="flex items-center gap-3 pb-4 border-b border-slate-800/80">
+        <div className="p-2.5 bg-teal-500/10 text-teal-400 rounded-xl border border-teal-500/20 shadow-inner">
           <UserCheck className="h-5 w-5" />
         </div>
-        <h3 className="text-lg font-bold text-white">{t.patientTitle}</h3>
+        <div>
+          <h3 className="text-lg font-bold text-white tracking-wide">{t.patientTitle}</h3>
+          <p className="text-xs text-slate-400">Subject Demographics & Bench</p>
+        </div>
       </div>
 
       <div className="space-y-4">
         {/* Name / ID */}
         <div>
-          <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+          <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
             <User className="h-3.5 w-3.5 text-teal-400" />
             <span>{t.patientId}</span>
           </label>
@@ -37,35 +42,36 @@ export const PatientInfoCard: React.FC<Props> = ({ language, patient, onChange }
             value={patient.id}
             onChange={(e) => updateField('id', e.target.value)}
             placeholder={t.patientIdPlaceholder}
-            className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+            className="w-full bg-slate-950/80 border border-slate-800/80 rounded-2xl px-4 py-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all min-h-[48px]"
           />
         </div>
 
         {/* Age & Gender in 2 cols */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
               {t.patientAge}
             </label>
             <input
               type="number"
+              inputMode="numeric"
               min="1"
               max="120"
               value={patient.age}
               onChange={(e) => updateField('age', e.target.value)}
               placeholder="esim. 45"
-              className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+              className="w-full bg-slate-950/80 border border-slate-800/80 rounded-2xl px-4 py-3 text-sm text-slate-100 placeholder-slate-600 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all min-h-[48px]"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
               {t.patientGender}
             </label>
             <select
               value={patient.gender}
               onChange={(e) => updateField('gender', e.target.value as PatientInfo['gender'])}
-              className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+              className="w-full bg-slate-950/80 border border-slate-800/80 rounded-2xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all min-h-[48px]"
             >
               <option value="">-- Valitse / Select --</option>
               <option value="male">{t.genderMale}</option>
@@ -78,14 +84,14 @@ export const PatientInfoCard: React.FC<Props> = ({ language, patient, onChange }
         {/* Step Height & Test Date in 2 cols */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
               <Ruler className="h-3.5 w-3.5 text-teal-400" />
               <span>{t.stepHeight}</span>
             </label>
             <select
               value={patient.stepHeight}
               onChange={(e) => updateField('stepHeight', e.target.value)}
-              className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+              className="w-full bg-slate-950/80 border border-slate-800/80 rounded-2xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all min-h-[48px]"
             >
               <option value="50 cm">{t.stepHeightMen}</option>
               <option value="40 cm">{t.stepHeightWomen}</option>
@@ -95,7 +101,7 @@ export const PatientInfoCard: React.FC<Props> = ({ language, patient, onChange }
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
               <Calendar className="h-3.5 w-3.5 text-teal-400" />
               <span>{t.testDate}</span>
             </label>
@@ -103,7 +109,7 @@ export const PatientInfoCard: React.FC<Props> = ({ language, patient, onChange }
               type="date"
               value={patient.date}
               onChange={(e) => updateField('date', e.target.value)}
-              className="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"
+              className="w-full bg-slate-950/80 border border-slate-800/80 rounded-2xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all min-h-[48px]"
             />
           </div>
         </div>
