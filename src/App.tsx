@@ -8,7 +8,8 @@ import { MetronomeModule } from './components/MetronomeModule';
 import { PatientInfoCard } from './components/PatientInfoCard';
 import { HeartRateCard } from './components/HeartRateCard';
 import { ResultsCard } from './components/ResultsCard';
-import { ShieldCheck, HeartPulse } from 'lucide-react';
+import { ShieldCheck, HeartPulse, Mail, MapPin } from 'lucide-react';
+import sharedInfo from './data/shared_info.json';
 
 export const App: React.FC = () => {
   // 1. Initial Language Selection State
@@ -70,6 +71,10 @@ export const App: React.FC = () => {
     );
   }
 
+  const contactEmail = sharedInfo?.yhteystiedot?.sahkoposti || 'janne@tiedottajanne.fi';
+  const location = sharedInfo?.yhteystiedot?.paikkakunta || 'Oulu, Suomi';
+  const companyName = sharedInfo?.yritys || 'Säkkinen Yhtiöt';
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans antialiased">
       {/* Header */}
@@ -128,12 +133,22 @@ export const App: React.FC = () => {
 
       </main>
 
-      {/* Clinical Footer */}
+      {/* Clinical Footer with Shared Info */}
       <footer className="border-t border-slate-900 bg-slate-950 py-6 text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <HeartPulse className="h-4 w-4 text-teal-400" />
-            <span>Kellottajanne • Kliininen Harvard-step-testi ja 120 BPM tahdistin</span>
+          <div className="flex flex-col sm:flex-row items-center gap-3">
+            <div className="flex items-center gap-2">
+              <HeartPulse className="h-4 w-4 text-teal-400" />
+              <span className="font-semibold text-slate-300">Kellottajanne • {companyName}</span>
+            </div>
+            <div className="flex items-center gap-3 text-slate-400 text-[11px]">
+              <span className="flex items-center gap-1">
+                <Mail className="h-3 w-3 text-teal-400" /> {contactEmail}
+              </span>
+              <span className="flex items-center gap-1">
+                <MapPin className="h-3 w-3 text-teal-400" /> {location}
+              </span>
+            </div>
           </div>
           <div className="flex items-center gap-4 text-slate-400">
             <span className="flex items-center gap-1">
